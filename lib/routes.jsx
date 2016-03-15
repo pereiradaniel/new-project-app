@@ -33,3 +33,12 @@ FlowRouter.route('/search', {
 		});
 	}
 });
+
+FlowRouter.route('/select', {
+	name: 'selectProvider',
+	action() {
+		ReactLayout.render(MainLayout, {
+			content: <SelectProvider />
+		});
+	}
+});
