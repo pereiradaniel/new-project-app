@@ -32,7 +32,7 @@ App = React.createClass({
         <header>
           <h1>#App component</h1>
         </header>
-        {{loginButtons}}
+        <AccountsUIWrapper />
         <ul>Customers:
           {this.renderCustomers()}
         </ul>

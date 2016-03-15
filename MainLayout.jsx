@@ -6,6 +6,7 @@ MainLayout = React.createClass({
 	      <header>
 	      	<h1>#MainLayout</h1>
 	      </header>
+	      <AccountsUIWrapper />
 	      <main>
 	      	{this.props.content}
 	      </main>

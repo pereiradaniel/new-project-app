@@ -1,3 +1,14 @@
+if (Meteor.isClient) {
+	// Use gwendall:auth-client-callbacks package to detect user login and logout
+	Accounts.onLogin(function() {
+		FlowRouter.go('search');
+	});
+
+	Accounts.onLogout(function() {
+		FlowRouter.go('home');
+	});
+}
+
 FlowRouter.route('/', {
 	name: 'home',
 	action() {
@@ -8,7 +19,14 @@ FlowRouter.route('/', {
 	}
 });
 
+FlowRouter.triggers.enter([function(context, redirect){
+	if(!Meteor.userId()) {
+		FlowRouter.go('home');
+	}
+}]);
+
 FlowRouter.route('/search', {
+	name: 'search',
 	action() {
 		ReactLayout.render(MainLayout, {
 			content: <Search />
