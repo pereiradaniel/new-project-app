@@ -1,25 +1,21 @@
 // Search component for user
 Search = React.createClass({
-  getInitialState: function() {
+  mixins: [ReactMeteorData],
+
+  getMeteorData() {
     return {
-      deckProviders: 'No search results'
-    };
+      providers: Providers.find({}).fetch()
+    }
   },
 	handleSubmit(event) {
 		event.preventDefault();
-
-		this.setState({
-      deckProviders: ()=> {
-        return Providers.find({})
-      }
-    });
 	},
   renderProviders() {
-    if (this.state.deckProviders) {
-      return (
-        <h3>{this.state.deckProviders}</h3>
-      );
-    }
+    return this.data.providers.map((provider) => {
+      return <Provider
+        key={provider._id}
+        provider={provider} />;
+    });
   },
   render() {
     return (
