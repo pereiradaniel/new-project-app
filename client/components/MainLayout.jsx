@@ -3,10 +3,7 @@ MainLayout = React.createClass({
   render() {
     return (
     	<div>
-	      <header>
-	      	<h1>#MainLayout</h1>
-	      </header>
-	      <AccountsUIWrapper />
+    		<Header />
 	      <main>
 	      	{this.props.content}
 	      </main>

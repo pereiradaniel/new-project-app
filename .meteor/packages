@@ -25,3 +25,6 @@ kadira:react-layout
 accounts-password
 accounts-ui
 gwendall:auth-client-callbacks
+simple:json-routes
+aldeed:collection2
+raix:handlebar-helpers
