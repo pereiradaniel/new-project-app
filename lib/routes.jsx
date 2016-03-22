@@ -35,7 +35,7 @@ FlowRouter.route('/search', {
 });
 
 FlowRouter.route('/select', {
-	name: 'selectProvider',
+	name: 'select',
 	action() {
 		ReactLayout.render(MainLayout, {
 			content: <SelectProvider />
