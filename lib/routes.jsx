@@ -1,6 +1,15 @@
 if (Meteor.isClient) {
 	// Use gwendall:auth-client-callbacks package to detect user login and logout
 	Accounts.onLogin(function() {
+		if (Customers.find({ userId: Meteor.userId() })) {
+			console.log('A customer');
+		}
+		else if (Providers.find({ userId: Meteor.userId() })) {
+			console.log('A provider');
+		}
+		else {
+			console.log('Usertype not set');
+		}
 		FlowRouter.go('search');
 	});
 

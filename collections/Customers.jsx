@@ -11,6 +11,9 @@ CustomerSchema = new SimpleSchema({
 		type: String,
 		label: "Name"
 	},
+	userId: {
+		type: String
+	},
 	needs: {
 		type: [Need]
 	}

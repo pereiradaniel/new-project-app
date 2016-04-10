@@ -3,7 +3,13 @@ SelectProvider = React.createClass({
 
   getMeteorData() {
     return {
-      providers: Providers.find({}).fetch()
+      // return providers sorted by:
+      //    - meets minimum requirements
+      //    - is within range of search filter
+      //    - is flagged as available
+      providers: Providers.find(
+        {available: {$ne: false}}
+        ).fetch()
     }
   },
   renderProviders() {
