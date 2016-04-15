@@ -51,3 +51,12 @@ FlowRouter.route('/select', {
 		});
 	}
 });
+
+FlowRouter.route('/invite', {
+	name: 'invite',
+	action() {
+		ReactLayout.render(MainLayout, {
+			content: <Invite/>
+		});
+	}
+});

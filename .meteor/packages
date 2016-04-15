@@ -28,3 +28,4 @@ gwendall:auth-client-callbacks
 simple:json-routes
 aldeed:collection2
 raix:handlebar-helpers
+react-meteor-data
