@@ -12,7 +12,7 @@ if (Meteor.isClient) {
 		// find a provider profile
 		else if ( Providers.findOne({ userId: {$not: {$ne: Meteor.userId()}}}) ) {
 			console.log('A provider profile has been found');
-			userProfile = Providers.findOne({userId: {$not: {$ne: Meteor.userId()}}});
+			// userProfile = Providers.findOne({userId: {$not: {$ne: Meteor.userId()}}});
 			userIsCustomer = false;
 		}
 		// find 
