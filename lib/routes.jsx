@@ -6,11 +6,16 @@ if (Meteor.isClient) {
 		// find a customer profile
 		if ( Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
 			console.log('A customer profile has been found');
+			// userProfile = Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}});
+			userIsCustomer = true;
 		}
 		// find a provider profile
 		else if ( Providers.findOne({ userId: {$not: {$ne: Meteor.userId()}}}) ) {
 			console.log('A provider profile has been found');
+			userProfile = Providers.findOne({userId: {$not: {$ne: Meteor.userId()}}});
+			userIsCustomer = false;
 		}
+		// find 
 		else if (
 			!Providers.findOne({ userId: {$not: {$ne: Meteor.userId()}}}) &&
 			!Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
@@ -25,45 +30,51 @@ if (Meteor.isClient) {
 }
 
 // Routes
-FlowRouter.route('/', {
-	name: 'home',
-	action() {
-		if(Meteor.userId()) {
-			FlowRouter.go('search');
+
+// HOME ROUTE
+	FlowRouter.route('/', {
+		name: 'home',
+		action() {
+			if(Meteor.userId()) {
+				FlowRouter.go('search');
+			}
+			ReactLayout.render(App);
 		}
-		ReactLayout.render(App);
-	}
-});
+	});
 
-FlowRouter.triggers.enter([function(context, redirect){
-	if(!Meteor.userId()) {
-		FlowRouter.go('home');
-	}
-}]);
+	// Trigger home route if logout from anywhere
+	FlowRouter.triggers.enter([function(context, redirect){
+		if(!Meteor.userId()) {
+			FlowRouter.go('home');
+		}
+	}]);
 
-FlowRouter.route('/search', {
-	name: 'search',
-	action() {
-		ReactLayout.render(MainLayout, {
-			content: <Search />
-		});
-	}
-});
+// SEARCH ROUTE
+	FlowRouter.route('/search', {
+		name: 'search',
+		action() {
+			ReactLayout.render(MainLayout, {
+				content: <Search />
+			});
+		}
+	});
 
-FlowRouter.route('/select', {
-	name: 'select',
-	action() {
-		ReactLayout.render(MainLayout, {
-			content: <SelectProvider />
-		});
-	}
-});
+// SELECT-A-DECK ROUTE
+	FlowRouter.route('/select', {
+		name: 'select',
+		action() {
+			ReactLayout.render(MainLayout, {
+				content: <SelectProvider />
+			});
+		}
+	});
 
-FlowRouter.route('/invite', {
-	name: 'invite',
-	action() {
-		ReactLayout.render(MainLayout, {
-			content: <Invite/>
-		});
-	}
-});
+// INVITE ROUTE
+	FlowRouter.route('/invite', {
+		name: 'invite',
+		action() {
+			ReactLayout.render(MainLayout, {
+				content: <Invite/>
+			});
+		}
+	});
