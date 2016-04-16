@@ -1,14 +1,20 @@
+// Handle routes for Login and Logout
 if (Meteor.isClient) {
-	// Use gwendall:auth-client-callbacks package to detect user login and logout
+	// gwendall:auth-client-callbacks detects user login and logout
 	Accounts.onLogin(function() {
-		if (Customers.find({ userId: Meteor.userId() })) {
-			console.log('A customer');
+
+		// find a customer profile
+		if ( Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
+			console.log('A customer profile has been found');
 		}
-		else if (Providers.find({ userId: Meteor.userId() })) {
-			console.log('A provider');
+		// find a provider profile
+		else if ( Providers.findOne({ userId: {$not: {$ne: Meteor.userId()}}}) ) {
+			console.log('A provider profile has been found');
 		}
-		else {
-			console.log('Usertype not set');
+		else if (
+			!Providers.findOne({ userId: {$not: {$ne: Meteor.userId()}}}) &&
+			!Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
+			console.log('No profiles for this user');
 		}
 		FlowRouter.go('search');
 	});
@@ -18,6 +24,7 @@ if (Meteor.isClient) {
 	});
 }
 
+// Routes
 FlowRouter.route('/', {
 	name: 'home',
 	action() {
