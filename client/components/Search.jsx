@@ -11,7 +11,9 @@ Search = React.createClass({
   },
 	handleSubmit(event) {
 		event.preventDefault();
-    FlowRouter.go('select');
+      ReactLayout.render(MainLayout, {
+        content: <SelectProvider userProfile={this.data.userProfile} />
+      });
 	},
   render() {
     return (

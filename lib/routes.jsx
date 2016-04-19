@@ -39,16 +39,6 @@ if (Meteor.isClient) {
 			});
 		}
 	});
-	
-// SELECT-A-DECK ROUTE
-	FlowRouter.route('/select', {
-		name: 'select',
-		action() {
-			ReactLayout.render(MainLayout, {
-				content: <SelectProvider />
-			});
-		}
-	});
 
 // INVITE ROUTE
 	FlowRouter.route('/invite', {
