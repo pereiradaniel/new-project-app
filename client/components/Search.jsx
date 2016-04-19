@@ -3,8 +3,10 @@ Search = React.createClass({
   mixins: [ReactMeteorData],
 
   getMeteorData() {
-    return {
-      userProfile: ( userIsCustomer == true ? Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) : Providers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) )
+    if ( Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
+      return { userProfile: Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) };
+    } else if ( Providers.find({userId: {$not: {$ne: Meteor.userId()}}}) ) {
+      return { userProfile: Providers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) };
     }
   },
 	handleSubmit(event) {
@@ -17,7 +19,7 @@ Search = React.createClass({
         <h1>#Search</h1>
         <h3>(map is displayed)</h3>
         <h3>{ this.data.userProfile.name }</h3>
-        { this.data.userIsCustomer == true ?
+        { this.data.userProfile.userType === "customer" ?
           <form className="search" onSubmit={this.handleSubmit} >
           	Number of Hours Required
             <input type="number" ref="hoursInput" />
@@ -30,7 +32,7 @@ Search = React.createClass({
 
             <button>SEARCH</button>
         </form>
-        }
+      }
       </div>
     );
   }
