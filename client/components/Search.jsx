@@ -3,12 +3,16 @@ Search = React.createClass({
   mixins: [ReactMeteorData],
 
   getInitialState() {
+    // Initial component state
     return {
+      // False = show form, true = show results
       showCards: false
     }
   },
 
   getMeteorData() {
+    // Insert user's profile into userProfile
+    //   - Detects if user has profile in customers or providers
     if ( Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
       return {userProfile: Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) };
     } else if ( Providers.find({userId: {$not: {$ne: Meteor.userId()}}}) ) {
@@ -23,6 +27,7 @@ Search = React.createClass({
     });
   },
   renderSearchForm() {
+    // Returns form specific to user type
     if (this.data.userProfile.userType === "customer") {
       return (
           <form className="search" onSubmit={this.handleSubmit} >
@@ -45,12 +50,21 @@ Search = React.createClass({
   },
 	handleSubmit(event) {
 		event.preventDefault();
-    this.setState({
-      searchResults: Providers.find({available: {$ne: false}}).fetch(),
-      showCards: ! this.state.showCards
-    });
+    // Determines which user type db to search
+    if (this.data.userProfile.userType === "customer") {
+      this.setState({
+        searchResults: Providers.find({available: {$ne: false}}).fetch(),
+        showCards: ! this.state.showCards
+      });
+    } else {
+      this.setState({
+        searchResults: Customers.find({available: {$ne: false}}).fetch(),
+        showCards: ! this.state.showCards
+      });
+    }
 	},
   toggleCards() {
+    // Toggles showCards
     this.setState({ showCards: ! this.state.showCards });
   },
   render() {
