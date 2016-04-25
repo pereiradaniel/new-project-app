@@ -12,7 +12,7 @@ Provider = React.createClass({
     return (
       <div>
         <li>{this.props.provider.name}</li>
-        <li><button onClick={this.inviteProvider}>Invite provider</button></li>
+        <li><button onClick={this.inviteProvider}>Invite</button></li>
       </div>
     );
   }
