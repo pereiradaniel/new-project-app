@@ -3,10 +3,15 @@ Provider = React.createClass({
   propTypes: {
     // This component gets the provider to display through a React prop.
     // We can use propTypes to indicate it is required
-    provider: React.PropTypes.object.isRequired
+    provider: React.PropTypes.object.isRequired,
+    currentUserId: React.PropTypes.string.isRequired
   },
   inviteProvider() {
-    FlowRouter.go('invite');
+    // Create the invite
+    Invites.insert({
+      'customerId': this.props.currentUserId.toString(),
+      'providerId': this.props.provider._id.toString()
+    });
   },
   render() {
     return (

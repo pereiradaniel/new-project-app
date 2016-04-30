@@ -23,7 +23,8 @@ Search = React.createClass({
     return this.state.searchResults.map((provider) => {
       return <Provider
         key={provider._id}
-        provider={provider} />;
+        provider={provider}
+        currentUserId={this.data.userProfile._id.toString()} />;
     });
   },
   renderSearchForm() {
