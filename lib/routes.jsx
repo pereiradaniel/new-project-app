@@ -41,9 +41,10 @@ if (Meteor.isClient) {
 	});
 
 // INVITE ROUTE
-	FlowRouter.route('/invite', {
+	FlowRouter.route('/invite/:inviteId', {
 		name: 'invite',
-		action() {
+		action: function (params, queryParams) {
+			console.log(params);
 			ReactLayout.render(MainLayout, {
 				content: <Invite/>
 			});

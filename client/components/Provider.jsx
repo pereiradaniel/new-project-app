@@ -9,9 +9,11 @@ Provider = React.createClass({
   inviteProvider() {
     // Create the invite
     Invites.insert({
-      'customerId': this.props.currentUserId.toString(),
+      'customerId': Meteor.userId(),
       'providerId': this.props.provider._id.toString()
     });
+    inviteId = Invites.findOne({customerId: {$not: {$ne: Meteor.userId()}}})._id.toString();
+    FlowRouter.go('/invite/' + inviteId);
   },
   render() {
     return (
