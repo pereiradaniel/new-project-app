@@ -1,13 +1,13 @@
 Invites = new Mongo.Collection('invites');
 
 InviteSchema = new SimpleSchema({
-	customerId: {
+	inviteSenderId: {
 		type: String,
-		label: "customerId"
+		label: "inviteSenderId"
 	},
-	providerId: {
+	inviteReceiverId: {
 		type: String,
-		label: "providerId"
+		label: "inviteReceiverId"
 	}
 });
 

@@ -20,11 +20,10 @@ Search = React.createClass({
     }
   },
   renderSearchResults() {
-    return this.state.searchResults.map((provider) => {
-      return <Provider
-        key={provider._id}
-        provider={provider}
-        currentUserId={this.data.userProfile._id.toString()} />;
+    return this.state.searchResults.map((result) => {
+      return <SearchResult
+        key={result._id}
+        result={result} />;
     });
   },
   renderSearchForm() {
