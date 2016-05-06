@@ -13,7 +13,8 @@ Provider = React.createClass({
       'providerId': this.props.provider._id.toString()
     });
     inviteId = Invites.findOne({customerId: {$not: {$ne: Meteor.userId()}}})._id.toString();
-    FlowRouter.go('/invite/' + inviteId);
+    currentUserId = Meteor.userId();
+    FlowRouter.go('/invite/' + inviteId + '/' + currentUserId);
   },
   render() {
     return (

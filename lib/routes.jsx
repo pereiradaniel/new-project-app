@@ -41,12 +41,12 @@ if (Meteor.isClient) {
 	});
 
 // INVITE ROUTE
-	FlowRouter.route('/invite/:inviteId', {
+	FlowRouter.route('/invite/:inviteId/:currentUserId', {
 		name: 'invite',
 		action: function (params, queryParams) {
 			console.log(params);
 			ReactLayout.render(MainLayout, {
-				content: <Invite/>
+				content: <Invite inviteId={params.inviteId.toString()} currentUserId={params.currentUserId.toString()} />
 			});
 		}
 	});

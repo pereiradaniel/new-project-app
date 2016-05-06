@@ -1,18 +1,22 @@
 Invite = React.createClass({
+  propTypes: {
+    currentUserId: React.PropTypes.string.isRequired,
+    inviteId: React.PropTypes.string.isRequired
+  },
   mixins: [ReactMeteorData],
-  getInitisalState() {},
   getMeteorData() {
-    // Insert user's profile into userProfile
-    //   - Detects if user has profile in customers or providers
-    if ( Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) ) {
-      return {userProfile: Customers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) };
-    } else if ( Providers.find({userId: {$not: {$ne: Meteor.userId()}}}) ) {
-      return { userProfile: Providers.findOne({userId: {$not: {$ne: Meteor.userId()}}}) };
+    return {
+      currentInvite: Invites.findOne({_id: {$not: {$ne: this.props.inviteId}}})
     }
   },
 render() {
 	return (
-		<div>#Invite</div>
+    <div>
+		  <h3>#Invite</h3>
+      <p>current invite id: {this.props.inviteId}</p>
+      <p>current user id: {this.props.currentUserId}</p>
+      <p>this invite's customer id: {this.data.currentInvite.customerId}</p>
+    </div>
 		)
 }
 });
